@@ -4,3 +4,4 @@ hemtt
 hemtt.exe
 *.biprivatekey
 .venv
+tools/__pycache__

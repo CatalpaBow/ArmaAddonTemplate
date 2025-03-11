@@ -3,5 +3,6 @@
         "PATH": "${workspaceFolder}\\.venv\\Scripts;${env:PATH}"
     },
     "python.defaultInterpreterPath": "${workspaceFolder}\\.venv\\Scripts\\python.exe",
-    "code-runner.runInTerminal": true
+    "code-runner.runInTerminal": true,
+    "workspaceKeybindings.hemttEnable" : true
 }

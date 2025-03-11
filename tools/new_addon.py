@@ -3,19 +3,18 @@ import sys
 import shutil
 import tomllib
 
-def new_addon():
+def new_addon(addon_name):
     ##ルートディレクトリを調整
     root_dir = ".."
     if os.path.exists("addons"):
         root_dir = "."
     os.chdir(root_dir)
 
-    addon_name = input("Enter the addon name:")
-
     folder_path = create_addon_folder_from_template(addon_name)
     print("以下のパスにアドオンフォルダを作成しました:",folder_path)
     rewrite_files_based_on_project_cfg(addon_name,folder_path)
     print("アドオンフォルダの作成が完了しました")
+
 
 def create_addon_folder_from_template(addon_name):
     if(addon_name == 'main'):
@@ -83,5 +82,6 @@ def replace_line(line, replacements):
     return line
     
 if __name__ == "__main__":
-    new_addon()
+    addon_name = input("Enter the addon name:")
+    new_addon(addon_name)
     sys.exit()
