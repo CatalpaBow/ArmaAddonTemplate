@@ -3,7 +3,7 @@ import sys
 import shutil
 import tomllib
 
-def new_addon(addon_name):
+def excute(addon_name):
     ##ルートディレクトリを調整
     root_dir = ".."
     if os.path.exists("addons"):
@@ -83,5 +83,5 @@ def replace_line(line, replacements):
     
 if __name__ == "__main__":
     addon_name = input("Enter the addon name:")
-    new_addon(addon_name)
+    excute(addon_name)
     sys.exit()
