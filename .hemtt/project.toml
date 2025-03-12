@@ -1,5 +1,5 @@
-name = "a"
-author = "b"
-prefix = "c"
-mainprefix = "d"
+name = "Arma Addon Template"
+author = "FooBar Team"
+prefix = "aam"
+mainprefix = "z"
 git_hash = 0
