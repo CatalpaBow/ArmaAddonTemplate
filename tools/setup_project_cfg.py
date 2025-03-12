@@ -1,7 +1,8 @@
 import tomllib
 import tomli_w
 import os
-def excute():
+
+def execute():
     # ユーザーからの入力を取得
     name = input("Enter the name (e.g. 'Arma Addon Template'): ")
     author = input("Enter the author (e.g. 'FooBar Team'): ")
@@ -11,27 +12,33 @@ def excute():
     # git_hashは固定値0
     git_hash = 0
 
-    # このファイルのパスから2階層上をプロジェクトルートとする
+    # このスクリプトのディレクトリから2階層上をプロジェクトルートとする
     base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
     file_path = os.path.join(base_dir, ".hemtt", "project.toml")
 
-    # 辞書形式でデータを作成
-    toml_data = {
+    # 書き込み先のディレクトリを作成（存在しない場合）
+    os.makedirs(os.path.dirname(file_path), exist_ok=True)
+
+    # 既存のTOMLデータを読み込み
+    toml_data = {}
+    if os.path.exists(file_path):
+        with open(file_path, "rb") as f:
+            toml_data = tomllib.load(f)
+
+    # 入力値を反映
+    toml_data.update({
         "name": name,
         "author": author,
         "prefix": prefix,
         "mainprefix": mainprefix,
         "git_hash": git_hash
-    }
+    })
 
-    # 書き込み先のディレクトリを作成（存在しない場合）
-    os.makedirs(os.path.dirname(file_path), exist_ok=True)
+    # 書き込み
+    with open(file_path, "w", encoding="utf-8") as f:
+        f.write(tomli_w.dumps(toml_data))  # dump() ではなく dumps() を使う
 
-    # バイナリモード("wb")でファイルに書き込む
-    with open(file_path, "wb") as f:
-        tomli_w.dump(toml_data, f)
+    print(f"TOMLファイルが作成または更新されました: {file_path}")
 
-    print(f"TOMLファイルが作成されました: {file_path}")
-    
 if __name__ == "__main__":
-    excute()
+    execute()
